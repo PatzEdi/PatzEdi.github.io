@@ -1,6 +1,7 @@
 # PatzEdi - Github Pages
 This is my website hosted on Github Pages! :)
 
+Update: Redesigned UI
 
 ## **I hope you all enjoy what I do and what I will do in the near future. I plan to post a lot more of these useful repositories.** 
 ____________________________________________________________________________
