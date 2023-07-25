@@ -94,6 +94,7 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             width: 80%;
             padding: 20px;
@@ -103,6 +104,7 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.5s;
+            
         }
 
         .bottom-boxes.show {
@@ -121,8 +123,13 @@
             pointer-events: auto; /* Enable pointer events for clickable links */
             cursor: pointer;
             transition: transform 0.3s;
+            flex: 1 0 200px; /* Flex-grow, flex-shrink, and initial flex-basis */
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
         }
-
+        
         .box:hover {
             transform: scale(1.1);
         }
@@ -156,6 +163,11 @@
             z-index: 9999;
             pointer-events: none;
             font-size: 40px; /* Increase the font size for the "Loading" text */
+        }
+        @media screen and (max-width: 768px) {
+            .box {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -218,7 +230,7 @@
             }, 2000);
 
             // Redirect to another webpage after the delay (optional)
-            window.location.href = 'https://patzedi.github.io';
+            window.location.href = 'http://127.0.0.1:3000/index.html';
         };
         const bottomBoxes = document.querySelector('.bottom-boxes');
         const exploreText = document.querySelector('.explore-text');
