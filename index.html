@@ -1,103 +1,242 @@
 <!DOCTYPE html>
-<html>
-
-<body style="background-color:rgb(0, 0, 0);"></body>
-
-
-<style>
-  body {
-    background-image: url('assets/images/angryimg.png');
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: center;
-  background-size: cover;
-  }
-  </style>
+<html lang="en">
 <head>
-  <title>
-      PatzEdi-Github
-  </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatzEdi</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 200vh; /* Increased height to allow for scrolling */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #bbd6fc, #5fa2cf, #7cd2cf, #445fb0, #4c46c0, #fd8d6e, #f9a86a, #f7c978);
+            background-size: 300% 300%;
+            animation: gradientChange 20s ease infinite;
+        }
+
+        @keyframes gradientChange {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        h1#patzEdi {
+            font-size: 96px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            opacity: 1;
+            transition: transform 3s, opacity 3s;
+            margin-top: 50px; /* Adjust the margin-top value as needed */
+        }
+        h1 {
+            font-size: 96px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            opacity: 1;
+            transition: transform 3s, opacity 3s;
+            margin-top: 80px; /* Adjust the margin-top value as needed */
+        }
+
+        .hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .fixed-title {
+            font-size: 80px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 240px; /* Adjust the margin-top value as needed */
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(210, 81, 81, 0.0);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 20px;
+        }
+
+        .github-logo {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 30px;
+            margin-right: 10px;
+        }
+        .reddit-logo {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 30px;
+            margin-right: 60px;
+        }
+        .bottom-boxes {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .bottom-boxes.show {
+            opacity: 1;
+        }
+
+        .box {
+            color: white;
+            font-size: 24px; /* Increase the font size */
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            padding: 20px 40px; /* Increase the padding for larger boxes */
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            pointer-events: auto; /* Enable pointer events for clickable links */
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.1);
+        }
+        
+        .explore-text {
+            color: white;
+            font-size: 90px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        .explore-text.show {
+            opacity: 1;
+        }
+
+        .loading-overlay {
+            /* ... Styles for the loading overlay ... */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(144, 133, 211, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            z-index: 9999;
+            pointer-events: none;
+            font-size: 40px; /* Increase the font size for the "Loading" text */
+        }
+    </style>
 </head>
+<body>
+    <div class="loading-overlay">Loading, Please Wait</div>
+    <div class="top-bar">
+        <a href="https://github.com/PatzEdi" target="_blank">
+            <img class="github-logo" src="/assets/github.svg" alt="GitHub">
+        </a>
+        <a href="https://www.reddit.com/r/PatzEdi/" target="_blank">
+            <img class="reddit-logo" src="/assets/reddit-logo-14137.svg" alt="Reddit">
+        </a>
+    </div>
+    <h1 id="patzEdi">PatzEdi</h1>
+    <h1 class="fixed-title" id="mlText">Python. Machine Learning. Possibilities.</h1>
+    <script>
+        const patzEdiText = document.getElementById('patzEdi');
+        const mlText = document.getElementById('mlText');
+        const texts = [patzEdiText, mlText];
 
+        window.addEventListener('scroll', function() {
+            const screenHeight = window.innerHeight;
+            texts.forEach(text => {
+                const textPosition = text.getBoundingClientRect().top;
+                const scrollThreshold = screenHeight * 0.5; // Adjust the threshold as needed
+                if (textPosition < scrollThreshold) {
+                    text.classList.add('hidden');
+                } else {
+                    text.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+    <h2 class="explore-text">Explore.</h2>
+    <div class="bottom-boxes">
+        <a href="https://github.com/PatzEdi/InfinityWorlds" target="_blank" class="box">InfinityWorlds</a>
+        <a href="https://github.com/PatzEdi/FinderZ" target="_blank" class="box">FinderZ</a>
+        <a href="https://github.com/PatzEdi/Stockstir" target="_blank" class="box">Stockstir</a>
+        <a href="https://github.com/PatzEdi/" target="_blank" class="box">More</a>
+    </div>
+    <script>
+         // Show loading overlay on page reload
+         window.onload = function() {
+            // Reset animations
+            const animatedElements = document.querySelectorAll('.show');
+            animatedElements.forEach(element => {
+                element.classList.remove('show');
+            });
 
-<div style="margin:0 auto;text-align:center">
-  <div style="margin-left:auto;margin-right:auto;text-align:center">
+            // Scroll to the top
+            window.scrollTo(0, 0);
 
-    <h1 style="color:#41bf41">Welcome to PatzEdi's Github profile page!</p>
+            // Show loading overlay
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.style.display = 'flex';
 
-  </div>
-</div>
+            // Remove loading overlay after 2 seconds
+            setTimeout(function() {
+                loadingOverlay.style.display = 'none';
+            }, 2000);
 
-<div style="margin:0 auto;text-align:center">
-  <div style="margin-left:auto;margin-right:auto;text-align:center">
+            // Redirect to another webpage after the delay (optional)
+            window.location.href = 'http://127.0.0.1:3000/test.html';
+        };
+        const bottomBoxes = document.querySelector('.bottom-boxes');
+        const exploreText = document.querySelector('.explore-text');
 
-    <video width="500" height="240" autoplay muted loop>
-      <source src="assets/videos/glitchSignature.mov" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            const bottomThreshold = documentHeight - windowHeight - 200; // Adjust the threshold as needed
 
-  </div>
-</div>
-
-
-<div style="margin:0 auto;text-align:center">
-  <div style="margin-left:auto;margin-right:auto;text-align:center">
-   
-    <a href="http://github.com/PatzEdi/" style="color:#40b93e; font-size: 26px">Github</a>
-
-  </div>
-</div>
-
-<div style="margin:0 auto;text-align:center">
-  <div style="margin-left:auto;margin-right:auto;text-align:center">
-   
-    <a href="http://twitter.com/PatzEdi/" style="color:#308c2e; font-size: 26px">Twitter</a>
-
-  </div>
-</div>
-
-
-<div style="margin:0 auto;text-align:left">
-  <div style="margin-left:auto;margin-right:auto;text-align:left">
-
-    <h1 style="color:#216721">PatzEdi - About:</p>
-
-  </div>
-</div>
-
-<div style="margin:0 auto;text-align:center">
-  <div style="margin-left:auto;margin-right:auto;text-align:center">
-   
-    <strong> <span style="color:#4eb84e; font-size: 26px"> Hello, I am PatzEdi. Thank you for visiting my website on Github Pages! My real name is Edward Ferrari and I love to code as I would like to become a software engineer in the future of my career. Although I mostly like to code in  Python, I also love to code in other languages as well! Machine learning and ethical hacking are other topics that I am very interested in as  well. Concerning my Github repositories, my projects are there to not only improve my skills, but yours as well. I hope to not only make myself better at what I want to do, but make everyone better at what they want to do.</strong>
-
-  </div>
-</div>
-
-
-<div style="margin:0 auto;text-align:left">
-  <div style="margin-left:auto;margin-right:auto;text-align:left">
-   
-    <ul>
-      <li><a href="http://github.com/PatzEdi/InfinityWorlds" style="color:#000000; font-size: 26px">InfinityWorlds - A world of Infinite Possibilities</a></li>
-      <li><a href="http://github.com/PatzEdi/FinderZ" style="color:#000000; font-size: 26px">FinderZ - Full file management library</a></li>
-      <li><a href="http://github.com/PatzEdi/InjecToast" style="color:#000000; font-size: 26px">InjecToast - Android application toast injector</a></li>
-      <li><a href="http://github.com/PatzEdi/PyBite" style="color:#000000; font-size: 26px">PyBite - Python compilation made easy</a></li>
-      <li><a href="http://github.com/PatzEdi/PyTeslaStockScrape" style="color:#000000; font-size: 26px">PyTeslaStockScrape - Receive notifications when TSLA stock goes above/below given values.</a></li>
-
-    </ul>
-
-  </div>
-</div>
-
-
-<div style="margin:0 auto;text-align:center">
-  <div style="margin-left:auto;margin-right:auto;text-align:center">
-   
-    <small> <span style="color:#26ff4a; font-size: 26px"> Thank you for looking at my profile and Github repositories! If you like what I do, make sure to leave a star! </small>
-
-  </div>
-</div>
-
-
-
+            if (scrollPosition >= bottomThreshold) {
+                bottomBoxes.classList.add('show');
+                exploreText.classList.add('show');
+            } else {
+                bottomBoxes.classList.remove('show');
+                exploreText.classList.remove('show');
+            }
+        });
+    </script>
+</body>
 </html>
