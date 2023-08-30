@@ -9,7 +9,6 @@ ____________________________________________________________________________
 ## **Take a look at the source!**
 - I have never really done HTML before, so this was pretty much my first time.
 - I learned that it was easy to manage files, which is why I created an assets folder with my assets.
-- This includes the "glitch" effect name and the gradient background image.
 - I chose this specific theme because it was simple for me to do without having much HTML or CSS experience, and it at the same time looks fine.
 ____________________________________________________________________________
 ## **Make sure to leave a star!**
